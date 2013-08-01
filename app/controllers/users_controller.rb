@@ -14,6 +14,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
+      UserMailer.active_user(@user).deliver
+      UserMailer.welcome_email(@user).deliver
       sign_in @user
       flash[:success] = "Welcome to the Sample App!"
       redirect_to @user
@@ -41,6 +43,17 @@ class UsersController < ApplicationController
     User.find(params[:id]).destroy
     flash[:success] = "User destroyed."
     redirect_to users_url
+  end
+
+  def active
+    users = User.all
+    users.each do |user|
+      if Digest::MD5.hexdigest(user.email) == params[:active]
+        user.active = true
+        user.save
+      end
+    end
+    redirect_to root_url
   end
   
   private
