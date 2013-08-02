@@ -16,6 +16,8 @@ DailyReportGroup1::Application.routes.draw do
   match '/index',   to: 'static_pages#index', via: 'get'
   match '/help',    to: 'static_pages#help',    via: 'get'
   match '/about',   to: 'static_pages#about',   via: 'get'
+  match '/users&:active', to: 'users#active', as: '/users/active', via: 'get'
+  #match '/user&:ac', to: 'users#edit', as: "/users/edit", via: :get
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -31,7 +31,20 @@ DailyReportGroup1::Application.configure do
 
   # Do not compress assets
   config.assets.compress = false
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  # these options are only needed if you choose smtp delivery
+  config.action_mailer.smtp_settings = {
+  :address        => 'smtp.gmail.com',
+  :port           => 25,
+  :domain         => 'www.gmail.com',
+  :authentication => :login,
+  :user_name      => 'anhltn217@gmail.com',
+  :password       => 'ngocanhhoangbac'
+}
+
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
 end
